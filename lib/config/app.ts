@@ -1,15 +1,19 @@
 import * as express from "express";
 import * as bodyParser from "body-parser";
 import * as mongoose from "mongoose";
+import { UserRoutes } from "../routes/user.route";
 
 class App {
   public app: express.Application;
   public mongoUrl: string = "mongodb://localhost/workshop";
 
+  private user_route: UserRoutes = new UserRoutes();
+
   constructor() {
     this.app = express();
     this.config();
     this.mongoSetup();
+    this.user_route.route(this.app);
   }
 
   private config(): void {
